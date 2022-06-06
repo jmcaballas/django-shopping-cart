@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, ProductImage, PurchaseOrder
+from .models import Product, ProductImage, PurchaseOrder, Sale
 
 class ProductImageInline(admin.StackedInline):
     model = ProductImage
@@ -11,3 +11,4 @@ class Product(admin.ModelAdmin):
     list_display = ('name', 'stock')
 
 admin.site.register(PurchaseOrder)
+admin.site.register(Sale)

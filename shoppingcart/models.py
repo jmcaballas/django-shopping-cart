@@ -22,3 +22,12 @@ class PurchaseOrder(models.Model):
 
     def __str__(self):
         return str(self.date_created)
+
+class Sale(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, help_text='Select the products for this sale')
+    sale_quantity = models.PositiveIntegerField(default=0)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.date_created)
