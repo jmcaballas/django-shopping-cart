@@ -8,3 +8,4 @@ class ProductImageInline(admin.StackedInline):
 @admin.register(Product)
 class Product(admin.ModelAdmin):
     inlines = [ProductImageInline]
+    list_display = ('name', 'stock')
