@@ -9,3 +9,5 @@ class ProductImageInline(admin.StackedInline):
 class Product(admin.ModelAdmin):
     inlines = [ProductImageInline]
     list_display = ('name', 'stock')
+
+admin.site.register(PurchaseOrder)

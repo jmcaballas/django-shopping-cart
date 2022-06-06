@@ -19,3 +19,6 @@ class PurchaseOrder(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, help_text='Select the products for this purchase order')
     order_quantity = models.PositiveIntegerField(default=0)
     date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.date_created)
