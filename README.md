@@ -1,7 +1,7 @@
 # django-training-cart
 
 To-Do:
-- Create custom user model
+~~- Create custom user model~~
 - Add custom user model to other models
 - Make PurchaseOrder and Sale objects human-readable
 - Set limit for product stock (not < 0)
