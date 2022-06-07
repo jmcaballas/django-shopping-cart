@@ -5,7 +5,7 @@ To-Do:
 - Add custom user model to other models
 - Make PurchaseOrder and Sale objects human-readable
 - Set limit for product stock (not < 0)
-- Display currency (PHP)
+- (DONE) Display currency (PHP)
 - Show total amount of order
 - Allow list of sales to be sortable
 
