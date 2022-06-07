@@ -14,4 +14,10 @@ class Product(admin.ModelAdmin):
         return "₱" + str(obj.price)
 
 admin.site.register(PurchaseOrder)
-admin.site.register(Sale)
+
+@admin.register(Sale)
+class Sale(admin.ModelAdmin):
+    list_display = ('product', 'price_PHP', 'sale_quantity')
+
+    def price_PHP(self, obj):
+        return "₱" + str(obj.price)
