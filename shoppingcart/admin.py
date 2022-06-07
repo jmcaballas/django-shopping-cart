@@ -8,7 +8,10 @@ class ProductImageInline(admin.StackedInline):
 @admin.register(Product)
 class Product(admin.ModelAdmin):
     inlines = [ProductImageInline]
-    list_display = ('name', 'stock')
+    list_display = ('name', 'price_PHP', 'stock')
+
+    def price_PHP(self, obj):
+        return "₱" + str(obj.price)
 
 admin.site.register(PurchaseOrder)
 admin.site.register(Sale)
