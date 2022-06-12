@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Product, PurchaseOrder, PurchaseOrderItem, SaleOrder, SaleOrderItem, ProductImage
+from .models import Product, PurchaseOrder, PurchaseOrderItem, SaleOrder, SaleOrderItem, ProductImage, SaleQuerySet
 
 
 class ProductImageInline(admin.StackedInline):
@@ -9,17 +9,16 @@ class ProductImageInline(admin.StackedInline):
 
 
 @admin.register(Product)
-class ProductStock(admin.ModelAdmin):
+class ProductStockAdmin(admin.ModelAdmin):
     list_display = ('name', 'price', 'stock')
     inlines = [ProductImageInline]
 
     def stock(self, obj):
-        result = Product.objects.filter(name=obj).with_stock().values('stock').get()['stock']
-        return result
+        return Product.objects.filter(name=obj).with_stock().values('stock').get()['stock']
 
 
 @admin.register(PurchaseOrderItem)
-class PurchaseOrderItem(admin.ModelAdmin):
+class PurchaseOrderItemAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'purchase_order', 'get_created_at')
     
     @admin.display(description='Created at', ordering='purchase_order__created_at')
@@ -28,12 +27,12 @@ class PurchaseOrderItem(admin.ModelAdmin):
 
 
 @admin.register(PurchaseOrder)
-class PurchaseOrder(admin.ModelAdmin):
+class PurchaseOrderAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'created_at')
 
 
 @admin.register(SaleOrderItem)
-class SaleOrderItem(admin.ModelAdmin):
+class SaleOrderItemAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'unit_price', 'sale_order', 'get_created_at')
 
     @admin.display(description='Created at', ordering='sale_order__created_at')
@@ -42,9 +41,8 @@ class SaleOrderItem(admin.ModelAdmin):
 
 
 @admin.register(SaleOrder)
-class SaleOrderTotal(admin.ModelAdmin):
+class SaleOrderTotalAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'total', 'created_at')
 
     def total(self, obj):
-        result = SaleOrder.objects.filter(user=obj.user).with_total().values().get()['total']
-        return result
+        return SaleOrder.objects.filter(user=obj.user).with_total().values().get()['total']
