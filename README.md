@@ -1,13 +1,8 @@
 # django-training-cart
 
 To-Do:
-- (DONE) Create custom user model
-- Add custom user model to other models
-- Make PurchaseOrder and Sale objects human-readable
-- Set limit for product stock (not < 0)
-- (DONE) Display currency (PHP)
-- Show total amount of order
-- Allow list of sales to be sortable
+- Make total amount in SaleOrderTotalAdmin sortable
+- Make sure sale will not reduce a product's stock to below zero
 
 ## Getting started
 

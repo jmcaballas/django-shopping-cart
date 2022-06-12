@@ -44,5 +44,6 @@ class SaleOrderItemAdmin(admin.ModelAdmin):
 class SaleOrderTotalAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'total', 'created_at')
 
+    @admin.display(description='Total Amount')
     def total(self, obj):
         return SaleOrder.objects.filter(user=obj.user).with_total().values().get()['total']
