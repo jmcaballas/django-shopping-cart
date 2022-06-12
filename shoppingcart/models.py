@@ -1,5 +1,14 @@
+from decimal import Decimal
+import uuid
+
+from djmoney.models.fields import MoneyField
+
 from django.db import models
-import uuid  # for unique SKU
+from django.db.models import OuterRef, Subquery
+from django.db.models.functions import Coalesce
+
+from users.models import Account
+
 
 class ProductQuerySet(models.QuerySet):
     def with_purchases(self):
@@ -19,7 +28,7 @@ class ProductQuerySet(models.QuerySet):
 
     def with_sales(self):
         sale_order_items = SaleOrderItem.objects.filter(
-            product = models.OuterRef("pk")
+            product=models.OuterRef("pk"),
         ).order_by().values(
             "product",
         )
@@ -40,9 +49,16 @@ class ProductQuerySet(models.QuerySet):
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
-    sku = models.CharField(max_length=20, primary_key=True)
+    sku = models.UUIDField(primary_key=True, default=uuid.uuid4)
     description = models.CharField(max_length=500)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = MoneyField(
+        decimal_places=2,
+        max_digits=10,
+        default=Decimal("0.00"),
+        default_currency="PHP"
+    )
+    
+    
     objects = ProductQuerySet.as_manager()
 
     def __str__(self):
@@ -50,7 +66,7 @@ class Product(models.Model):
 
 
 class PurchaseOrder(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -84,7 +100,7 @@ class SaleQuerySet(models.QuerySet):
 
 
 class SaleOrder(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     objects = SaleQuerySet.as_manager()
 
@@ -97,7 +113,6 @@ class SaleOrderItem(models.Model):
     quantity = models.IntegerField()
     sale_order = models.ForeignKey(SaleOrder, on_delete=models.CASCADE)
     unit_price = MoneyField(
-        _("price"),
         decimal_places=2,
         max_digits=10,
         default=Decimal("0.00"),
