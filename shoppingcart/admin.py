@@ -21,7 +21,11 @@ class ProductStock(admin.ModelAdmin):
 
 @admin.register(PurchaseOrderItem)
 class PurchaseOrderItem(admin.ModelAdmin):
-    list_display = ('__str__', 'purchase_order')
+    list_display = ('__str__', 'purchase_order', 'get_created_at')
+    
+    @admin.display(description='Created at', ordering='purchase_order__created_at')
+    def get_created_at(self, obj):
+        return obj.purchase_order.created_at
 
 
 @admin.register(PurchaseOrder)
@@ -31,7 +35,11 @@ class PurchaseOrder(admin.ModelAdmin):
 
 @admin.register(SaleOrderItem)
 class SaleOrderItem(admin.ModelAdmin):
-    list_display = ('__str__', 'sale_order')
+    list_display = ('__str__', 'sale_order', 'get_created_at')
+
+    @admin.display(description='Created at', ordering='sale_order__created_at')
+    def get_created_at(self, obj):
+        return obj.sale_order.created_at
 
 
 @admin.register(SaleOrder)
