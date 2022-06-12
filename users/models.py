@@ -49,13 +49,13 @@ class Account(AbstractBaseUser):
     shipping_postal = models.CharField(max_length=50)
     phone = models.CharField(help_text='Enter 11-digit phone number', max_length=11)
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email']
 
     objects = MyAccountManager()
 
     def __str__(self):
-        return self.email
+        return self.username
 
     def has_perm(self, perm, obj=None):
         return self.is_admin

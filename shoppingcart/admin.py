@@ -4,9 +4,6 @@ from django.contrib import admin
 from .models import Product, PurchaseOrder, PurchaseOrderItem, SaleOrder, SaleOrderItem
 
 
-admin.site.register(PurchaseOrder)
-admin.site.register(SaleOrder)
-
 @admin.register(Product)
 class ProductStock(admin.ModelAdmin):
     list_display = ('name', 'price', 'stock')
@@ -21,9 +18,20 @@ class PurchaseOrderItem(admin.ModelAdmin):
     list_display = ('__str__', 'purchase_order')
 
 
+@admin.register(PurchaseOrder)
+class PurchaseOrder(admin.ModelAdmin):
+    list_display = ('__str__', 'created_at')
+
+
 @admin.register(SaleOrderItem)
 class SaleOrderItem(admin.ModelAdmin):
     list_display = ('__str__', 'sale_order')
+
+
+@admin.register(SaleOrder)
+class SaleOrder(admin.ModelAdmin):
+    list_display = ('__str__', 'created_at')
+
 
 # class ProductImageInline(admin.StackedInline):
 #     model = ProductImage
