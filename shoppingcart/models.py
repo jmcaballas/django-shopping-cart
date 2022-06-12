@@ -65,6 +65,11 @@ class Product(models.Model):
         return self.name
 
 
+class ProductImage(models.Model):
+    images = models.ImageField(blank=True, upload_to='product-images')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+
 class PurchaseOrder(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -123,9 +128,7 @@ class SaleOrderItem(models.Model):
         return f"{self.product.name} - {self.quantity}"
 
 
-# class ProductImage(models.Model):
-#     images = models.ImageField(blank=True, upload_to='product-images')
-#     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
 
 # class PurchaseOrder(models.Model):
 #     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, help_text='Select the products for this purchase order')
