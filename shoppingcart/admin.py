@@ -1,5 +1,4 @@
 from django.contrib import admin
-# from .models import Product, ProductImage, PurchaseOrder, Sale
 
 from .models import Product, PurchaseOrder, PurchaseOrderItem, SaleOrder, SaleOrderItem, ProductImage
 
@@ -14,8 +13,8 @@ class ProductStock(admin.ModelAdmin):
     list_display = ('name', 'price', 'stock')
     inlines = [ProductImageInline]
 
-    def stock(self, instance):
-        result = Product.objects.filter(name=instance).with_stock().values('stock').get()['stock']
+    def stock(self, obj):
+        result = Product.objects.filter(name=obj).with_stock().values('stock').get()['stock']
         return result
 
 
@@ -35,7 +34,7 @@ class PurchaseOrder(admin.ModelAdmin):
 
 @admin.register(SaleOrderItem)
 class SaleOrderItem(admin.ModelAdmin):
-    list_display = ('__str__', 'sale_order', 'get_created_at')
+    list_display = ('__str__', 'unit_price', 'sale_order', 'get_created_at')
 
     @admin.display(description='Created at', ordering='sale_order__created_at')
     def get_created_at(self, obj):
@@ -43,25 +42,9 @@ class SaleOrderItem(admin.ModelAdmin):
 
 
 @admin.register(SaleOrder)
-class SaleOrder(admin.ModelAdmin):
-    list_display = ('__str__', 'created_at')
+class SaleOrderTotal(admin.ModelAdmin):
+    list_display = ('__str__', 'total', 'created_at')
 
-
-
-
-# @admin.register(Product)
-# class Product(admin.ModelAdmin):
-#     inlines = [ProductImageInline]
-#     list_display = ('name', 'price_PHP', 'stock')
-
-#     def price_PHP(self, obj):
-#         return "₱" + str(obj.price)
-
-# admin.site.register(PurchaseOrder)
-
-# @admin.register(Sale)
-# class Sale(admin.ModelAdmin):
-#     list_display = ('product', 'price_PHP', 'sale_quantity')
-
-#     def price_PHP(self, obj):
-#         return "₱" + str(obj.price)
+    def total(self, obj):
+        result = SaleOrder.objects.filter(user=obj.user).with_total().values().get()['total']
+        return result
