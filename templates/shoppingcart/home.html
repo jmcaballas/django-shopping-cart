@@ -1,9 +1,26 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}Art HQ{% endblock %}
 
 {% block content %}
-<div class="container mt-5 gap-3 d-flex flex-column align-items-center justify-content-center">
-    <h1>Home</h1>
-</div>
+<section class="home-products p-5">
+    <div class="container">
+        {% for product in products %}
+            {% if forloop.first %}<div class="row my-5">{% endif %}
+                <div class="col-3">
+                    <div class="card bg-dark text-light">
+                        {% comment %} <img src="{{product.productimage_set.get.images.url}}" class="img-fluid"> {% endcomment %}
+                        <div class="card-body">
+                            <h5 class="card-title">PAINTING 1</h5>
+                            <p class="card-text">BUY ME</p>
+                        </div>
+                    </div>
+                </div>
+            {% if forloop.counter|divisibleby:4 %}</div><div class="row my-5">{% endif %}
+            {% if forloop.last %}</div>{% endif %}
+        {% endfor %}
+    </div>
+</section>
 {% endblock %}
