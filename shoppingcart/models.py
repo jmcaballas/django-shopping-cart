@@ -50,6 +50,7 @@ class ProductQuerySet(models.QuerySet):
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=250, null=False, unique=True)
     sku = models.UUIDField(primary_key=True, default=uuid.uuid4)
     description = models.CharField(max_length=500)
     price = MoneyField(
@@ -58,7 +59,6 @@ class Product(models.Model):
         default=Decimal("0.00"),
         default_currency="PHP"
     )
-    
     
     objects = ProductQuerySet.as_manager()
 

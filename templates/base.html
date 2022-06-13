@@ -13,7 +13,7 @@
 <body>
     <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
         <div class="container">
-            <a href={% url 'home' %} class="navbar-brand">Art HQ</a>
+            <a href={% url 'shoppingcart:home' %} class="navbar-brand">Art HQ</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
                 <span class="navbar-toggler-icon"></span>
@@ -23,7 +23,7 @@
                 <ul class="navbar-nav ms-auto">
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a href={% url 'cart' %} class="nav-link">Cart</a>
+                        <a href={% url 'shoppingcart:cart' %} class="nav-link">Cart</a>
                     </li>
                     <li class="nav-item">
                         <a href={% url 'logout' %} class="nav-link">Log-out</a>

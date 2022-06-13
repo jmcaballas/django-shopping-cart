@@ -12,6 +12,7 @@ class ProductImageInline(admin.StackedInline):
 class ProductStockAdmin(admin.ModelAdmin):
     list_display = ('name', 'price', 'stock')
     inlines = [ProductImageInline]
+    prepopulated_fields = {"slug": ("name",)}
 
     def stock(self, obj):
         return Product.objects.filter(name=obj).with_stock().values('stock').get()['stock']
