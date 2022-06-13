@@ -4,6 +4,7 @@ import uuid
 from djmoney.models.fields import MoneyField
 from djmoney.money import Money
 
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.db.models.functions import Coalesce
 
@@ -80,7 +81,7 @@ class PurchaseOrder(models.Model):
 
 class PurchaseOrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(validators = [MinValueValidator(1)])
     purchase_order = models.ForeignKey(PurchaseOrder, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -116,7 +117,7 @@ class SaleOrder(models.Model):
 
 class SaleOrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(validators = [MinValueValidator(1)])
     sale_order = models.ForeignKey(SaleOrder, on_delete=models.CASCADE)
     unit_price = MoneyField(
         decimal_places=2,
