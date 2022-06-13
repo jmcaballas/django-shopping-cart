@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %}Log-in{% endblock %}
+{% block title %}Register{% endblock %}
 {% block navmenu1 %}<a href={% url 'register' %} class="nav-link">Register</a>{% endblock %}
 {% block navmenu2 %}<a href={% url 'login' %} class="nav-link">Log-in</a>{% endblock %}
 
 {% block content %}
 <div class="container mt-5 gap-3 d-flex flex-column align-items-center justify-content-center">
-    <h1>Log-in</h1>
+    <h1>Register</h1>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
