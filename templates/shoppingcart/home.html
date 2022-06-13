@@ -15,9 +15,14 @@
                 <div class="col-md-3 col-sm-6 my-3 my-md-0">
                     <div class="card bg-dark text-light">
                         <img src="{{product.productimage_set.get.images.url}}" class="img-fluid">
-                        <div class="card-body">
-                            <h5 class="card-title">PAINTING 1</h5>
-                            <p class="card-text">BUY ME</p>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.description }}</p>
+                            <h5 class="card-text">{{ product.price }}</h5>
+                            {% if user.is_authenticated %}
+                            <p>NUMBER FIELD FOR ORDER</p>
+                            <button class="btn btn-danger mt-auto">Add to Cart</button>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

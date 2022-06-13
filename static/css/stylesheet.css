@@ -5,7 +5,8 @@ body::before {
 }
 
 .home-products .card {
-    min-height: 400px;
+    height: 450px;
+    max-height: 450px;
 }
 
 .home-products img {
