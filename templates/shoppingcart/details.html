@@ -1,15 +1,30 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}Art HQ - Details{% endblock %}
 
 {% block content %}
-<div class="container mt-4 d-flex align-items-center justify-content-center">
-    <h1>{{ product.name }}</h1>
+<div class="container mt-5 d-flex align-items-center justify-content-center">
+    <a href={% url 'shoppingcart:home' %} class="link-dark">
+        <h1>Art HQ Collection</h1>
+    </a>
 </div>
 
 <section class="details">
-    <div class="container">
-        <img src="{{ product.productimage_set.get.images.url }}" alt="">
+    <div class="container mt-5">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-md text-center">
+                <img src="{{ product.productimage_set.get.images.url }}" class="img-fluid">
+            </div>
+            <div class="col-md">
+                <h2>{{ product.name }}</h2>
+                <h4>{{ product.description }}</h4>
+                <h2>{{ product.price }}</h2>
+                <h4>[NUMBER FIELD FOR ORDER]</h4>
+                <button class="btn btn-danger">Add to Cart</button>
+            </div>
+        </div>
     </div>
 </section>
 {% endblock %}

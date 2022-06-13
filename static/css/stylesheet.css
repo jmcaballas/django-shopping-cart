@@ -19,3 +19,7 @@ body::before {
 .home-products button {
     width: 150px;
 }
+
+.details img {
+    max-height: 500px;
+}
