@@ -5,7 +5,7 @@ from .models import Product
 
 
 def home(request):
-    products = Product.objects.all()
+    products = Product.objects.all().order_by("name")
 
     context = {
         'products': products,
