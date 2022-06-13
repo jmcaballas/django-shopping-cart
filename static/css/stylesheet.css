@@ -1,3 +1,9 @@
+body::before {
+    display: block;
+    content: '';
+    height: 60px;
+}
+
 .home-products .card {
     min-height: 400px;
 }
