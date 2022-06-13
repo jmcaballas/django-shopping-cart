@@ -4,4 +4,4 @@ from django.shortcuts import render
 
 @login_required
 def shoppingcart(request):
-    return render(request, 'base.html', {})
+    return render(request, 'shoppingcart/home.html', {})
