@@ -1,3 +1,9 @@
 .home-products .card {
-    min-height: 250px;
+    min-height: 400px;
+}
+
+.home-products img {
+    height: 200px;
+    width: auto;
+    object-fit: cover;
 }
