@@ -5,7 +5,7 @@ body::before {
 }
 
 .home-products .card {
-    height: 450px;
+    height: 375px;
     max-height: 450px;
 }
 
@@ -14,4 +14,8 @@ body::before {
     max-height: 200px;
     width: auto;
     /* object-fit: cover; */
+}
+
+.home-products button {
+    width: 150px;
 }
