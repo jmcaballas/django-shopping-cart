@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Log-in{% endblock %}
+{% block navmenu1 %}Register{% endblock %}
+{% block navmenu2 %}Log-in{% endblock %}
+
+{% block content %}
+<div class="container mt-5 gap-3 d-flex flex-column align-items-center justify-content-center">
+    <h1>Log-in</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit">
+    </form>
+</div>
+{% comment %} <br><a href={% url 'register' %}>Register here</a> {% endcomment %}
+{% endblock %}
