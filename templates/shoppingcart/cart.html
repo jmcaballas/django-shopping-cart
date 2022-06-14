@@ -28,7 +28,7 @@
                 <h3>{{ sale.product.price }}</h3>
             </div>
             <div class="col">
-                <a href={% url 'shoppingcart:delete-from-cart' sale.id %}>
+                <a href={% url 'shoppingcart:delete-from-cart' sale.id %} class="link-danger">
                     <h2><i class="bi bi-cart-x"></i></h2>
                 </a>
             </div>
