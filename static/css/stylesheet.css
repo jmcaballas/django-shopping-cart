@@ -13,10 +13,9 @@ body::before {
     height: 200px;
     max-height: 200px;
     width: auto;
-    /* object-fit: cover; */
 }
 
-.home-products button {
+.home-products .card .btn {
     width: 150px;
 }
 
