@@ -5,23 +5,12 @@ from django.views.generic import DetailView, ListView
 from .models import Product
 
 
-# def home(request):
-#     products = Product.objects.all().order_by("name")
-
-#     context = {
-#         'products': products,
-#     }
-    
-#     return render(request, 'shoppingcart/home.html', context)
-
-
 class ProductListView(ListView):
-    model = Product
+    queryset = Product.objects.with_stock()
     template_name = "shoppingcart/home.html"
     context_object_name = 'products'
     ordering = ['name']
     paginate_by = 24
-
 
 
 class ProductDetailView(DetailView):

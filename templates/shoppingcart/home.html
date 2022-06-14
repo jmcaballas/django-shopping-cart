@@ -22,11 +22,13 @@
                         </a>
                         <div class="card-body d-flex flex-column align-items-center">
                             <a href="" class="link-light"><h5 class="card-title">{{ product.name }}</h5></a>
-                            {% comment %} <p class="card-text">{{ product.description }}</p> {% endcomment %}
                             <h5 class="card-text mt-auto">{{ product.price }}</h5>
                             {% if user.is_authenticated %}
-                            <button class="btn btn-danger">Add to Cart</button>
-
+                                {% if product.stock > 0 %}
+                                    <button class="btn btn-danger">Add to Cart</button>
+                                {% else %}
+                                    <button class="btn btn-danger" disabled>Add to Cart</button>
+                                {% endif %}
                             {% else %}
                             {% endif %}
                         </div>
