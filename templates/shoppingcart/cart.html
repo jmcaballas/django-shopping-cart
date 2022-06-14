@@ -3,7 +3,31 @@
 {% block title %}Art HQ - Cart{% endblock %}
 
 {% block content %}
-<div class="container mt-5 gap-3 d-flex flex-column align-items-center justify-content-center">
+<div class="container mt-5 d-flex align-items-center justify-content-center">
+    <a href={% url 'shoppingcart:home' %} class="link-dark">
+        <h1>Art HQ Collection</h1>
+    </a>
+</div>
+
+<div class="container mt-3 text-center">
     <h1>Cart</h1>
 </div>
+
+<section class="cart">
+    <div class="container">
+        {% for sale in sales %}
+        <div class="row text-center align-items-center my-3">
+            <div class="col">
+                <img src="{{ sale.product.productimage_set.get.images.url }}" class="img-fluid">
+            </div>
+            <div class="col">
+                <h2>{{ sale.product.name }}</h2>
+            </div>
+            <div class="col">
+                <h2>{{ sale.product.price }}</h2>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
 {% endblock %}

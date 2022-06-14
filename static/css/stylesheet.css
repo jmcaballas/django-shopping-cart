@@ -22,3 +22,7 @@ body::before {
 .details img {
     max-height: 500px;
 }
+
+.cart img {
+    max-height: 100px;
+}

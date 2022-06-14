@@ -37,4 +37,10 @@ def add_to_cart(request, slug):
 
 @login_required
 def cart(request):
-    return render(request, 'shoppingcart/cart.html', {})
+    sales = SaleOrderItem.objects.filter(sale_order__user=request.user)
+
+    context = {
+        'sales': sales
+    }
+
+    return render(request, 'shoppingcart/cart.html', context)
