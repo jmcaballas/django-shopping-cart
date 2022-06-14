@@ -47,5 +47,10 @@
             <h3>₱{{ cart_total|floatformat:2 }}</h3>
         </div>
     </div>
+    <div class="row text-center mt-3">
+        <a href={% url 'shoppingcart:checkout' %}>
+            <button class="btn btn-danger btn-lg">Check out</button>
+        </a>
+    </div>
 </div>
 {% endblock %}

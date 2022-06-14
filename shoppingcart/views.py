@@ -70,3 +70,7 @@ def cart(request):
     }
 
     return render(request, 'shoppingcart/cart.html', context)
+
+@login_required
+def checkout(request):
+    return render(request, 'shoppingcart/checkout.html', {})

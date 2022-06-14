@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Art HQ - Checkout{% endblock %}
+
+{% block content %}
+<div class="container mt-5 d-flex align-items-center justify-content-center">
+    <a href={% url 'shoppingcart:home' %} class="link-dark">
+        <h1>Art HQ Collection</h1>
+    </a>
+</div>
+
+<div class="container mt-3 text-center">
+    <h2>Thank you for purchasing!</h2>
+</div>
+{% endblock %}
