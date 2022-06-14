@@ -1,18 +1,26 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 
 from .models import Product
 
 
-def home(request):
-    products = Product.objects.all().order_by("name")
+# def home(request):
+#     products = Product.objects.all().order_by("name")
 
-    context = {
-        'products': products,
-    }
+#     context = {
+#         'products': products,
+#     }
     
-    return render(request, 'shoppingcart/home.html', context)
+#     return render(request, 'shoppingcart/home.html', context)
+
+
+class ProductListView(ListView):
+    model = Product
+    template_name = "shoppingcart/home.html"
+    context_object_name = 'products'
+    ordering = ['name']
+
 
 
 class ProductDetailView(DetailView):
