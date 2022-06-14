@@ -1,8 +1,8 @@
 # django-training-cart
 
 To-Do:
-- Make total amount in SaleOrderTotalAdmin sortable
-- Make sure sale will not reduce a product's stock to below zero
+- Add number field to input quantity in ordering via "Add to Cart" button
+- Add field to update the quantity in cart page
 
 ## Getting started
 
