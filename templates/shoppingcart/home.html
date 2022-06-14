@@ -18,7 +18,7 @@
                 <div class="col-md-3 col-sm-6 my-3 my-md-0">
                     <div class="card bg-dark text-light d-flex align-items-center justify-content-center">
                         <a href={% url 'shoppingcart:details' product.slug %}>
-                            <img src="{{product.productimage_set.get.images.url}}" class="img-fluid mt-3">
+                            <img src="{{ product.productimage_set.first.images.url }}" class="img-fluid mt-3">
                         </a>
                         <div class="card-body d-flex flex-column align-items-center">
                             <a href={% url 'shoppingcart:details' product.slug %} class="link-light">

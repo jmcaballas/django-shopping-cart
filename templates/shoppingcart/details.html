@@ -14,9 +14,11 @@
 <section class="details">
     <div class="container mt-5">
         <div class="row align-items-center justify-content-between">
-            <div class="col-md text-center">
-                <img src="{{ product.productimage_set.get.images.url }}" class="img-fluid">
-            </div>
+            {% for image in product_image %}
+                <div class="col-md text-center">
+                    <img src="{{ image.images.url }}" class="img-fluid">
+                </div>
+            {% endfor %}
             <div class="col-md">
                 <h2>{{ product.name }}</h2>
                 <h4>{{ product.description }}</h4>

@@ -3,7 +3,7 @@ from django.db.models import Sum
 from django.shortcuts import render, redirect
 from django.views.generic import DetailView, ListView
 
-from .models import Product, SaleOrder, SaleOrderItem
+from .models import Product, SaleOrder, SaleOrderItem, ProductImage
 
 
 class ProductListView(ListView):
@@ -23,13 +23,19 @@ class ProductListView(ListView):
 
 class ProductDetailView(DetailView):
     queryset = Product.objects.with_stock()
+    model = ProductImage
     template_name = "shoppingcart/details.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
         if self.request.user.is_authenticated:
             cart_count = SaleOrderItem.objects.filter(sale_order__user=self.request.user).count()
             context["cart_count"] = cart_count
+        
+        product_image = ProductImage.objects.filter(product__name=self.object.name)
+        context["product_image"] = product_image
+        
         return context
 
 
