@@ -35,6 +35,27 @@
             {% if forloop.counter|divisibleby:4 %}</div><div class="row my-5">{% endif %}
             {% if forloop.last %}</div>{% endif %}
         {% endfor %}
+        {% if is_paginated %}
+
+            {% if page_obj.has_previous %}
+                <a href="?page=1" class="btn btn-outline-danger">First</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-danger">Previous</a>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+                {% if num == page_obj.number %}
+                    <a href="?page={{ num }}" class="btn btn-danger">{{ num }}</a>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a href="?page={{ num }}" class="btn btn-outline-danger">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-danger">Next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-danger">Last</a>
+            {% endif %}
+
+        {% endif %}
     </div>
 </section>
 {% endblock %}

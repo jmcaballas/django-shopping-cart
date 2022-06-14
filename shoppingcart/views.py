@@ -20,6 +20,7 @@ class ProductListView(ListView):
     template_name = "shoppingcart/home.html"
     context_object_name = 'products'
     ordering = ['name']
+    paginate_by = 24
 
 
 
