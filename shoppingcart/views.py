@@ -65,12 +65,24 @@ def cart(request):
 
     context = {
         'sales': sales,
-        'cart_count':cart_count,
-        'cart_total':cart_total,
+        'cart_count': cart_count,
+        'cart_total': cart_total,
     }
 
     return render(request, 'shoppingcart/cart.html', context)
 
+
 @login_required
 def checkout(request):
-    return render(request, 'shoppingcart/checkout.html', {})
+    checkout_product = SaleOrderItem.objects.filter(sale_order__user=request.user)
+    
+    if checkout_product.exists():
+        checkout_product.delete()
+
+    cart_count = SaleOrderItem.objects.filter(sale_order__user=request.user).count()
+    
+    context = {
+        'cart_count': cart_count,
+    }
+
+    return render(request, 'shoppingcart/checkout.html', context)
