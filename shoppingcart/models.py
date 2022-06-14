@@ -68,7 +68,7 @@ class Product(models.Model):
 
 class ProductImage(models.Model):
     images = models.ImageField(blank=True, upload_to='product-images')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
 
 
 class PurchaseOrder(models.Model):
