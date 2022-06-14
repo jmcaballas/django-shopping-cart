@@ -12,10 +12,22 @@ class ProductListView(ListView):
     ordering = ['name']
     paginate_by = 24
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cart_count = SaleOrderItem.objects.filter(sale_order__user=self.request.user).count()
+        context["cart_count"] = cart_count
+        return context
+
 
 class ProductDetailView(DetailView):
     queryset = Product.objects.with_stock()
     template_name = "shoppingcart/details.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cart_count = SaleOrderItem.objects.filter(sale_order__user=self.request.user).count()
+        context["cart_count"] = cart_count
+        return context
 
 
 @login_required
@@ -37,9 +49,11 @@ def add_to_cart(request, slug):
 @login_required
 def cart(request):
     sales = SaleOrderItem.objects.filter(sale_order__user=request.user)
+    cart_count = SaleOrderItem.objects.filter(sale_order__user=request.user).count()
 
     context = {
-        'sales': sales
+        'sales': sales,
+        'cart_count':cart_count
     }
 
     return render(request, 'shoppingcart/cart.html', context)
