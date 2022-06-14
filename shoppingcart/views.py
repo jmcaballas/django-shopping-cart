@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Sum
 from django.shortcuts import render, redirect
 from django.views.generic import DetailView, ListView
 
@@ -60,10 +61,12 @@ def delete_from_cart(request, id):
 def cart(request):
     sales = SaleOrderItem.objects.filter(sale_order__user=request.user)
     cart_count = SaleOrderItem.objects.filter(sale_order__user=request.user).count()
+    cart_total = SaleOrderItem.objects.filter(sale_order__user=request.user).aggregate(Sum('unit_price'))['unit_price__sum']
 
     context = {
         'sales': sales,
         'cart_count':cart_count,
+        'cart_total':cart_total,
     }
 
     return render(request, 'shoppingcart/cart.html', context)

@@ -36,4 +36,16 @@
         {% endfor %}
     </div>
 </section>
+
+<div class="container">
+    <hr>
+    <div class="row text-center justify-content-center">
+        <div class="col-3">
+            <h2>Total:</h2>
+        </div>
+        <div class="col-3">
+            <h3>₱{{ cart_total|floatformat:2 }}</h3>
+        </div>
+    </div>
+</div>
 {% endblock %}
