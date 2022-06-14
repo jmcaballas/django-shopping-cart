@@ -23,11 +23,11 @@
                 <h2>{{ product.price }}</h2>
                 {% if user.is_authenticated %}
                     {% if product.stock > 0 %}
-                        <h4>[NUMBER FIELD FOR ORDER]</h4>
-                        <button class="btn btn-danger">Add to Cart</button>
+                        <a href={% url 'shoppingcart:add-to-cart' product.slug %}>
+                            <button class="btn btn-danger">Add to Cart</button>
+                        </a>
                     {% else %}
-                        <h4>OUT OF STOCK</h4>
-                        <button class="btn btn-danger" disabled>Add to Cart</button>
+                        <button class="btn btn-danger" disabled>Out of Stock</button>
                     {% endif %}
                 {% endif %}
             </div>
