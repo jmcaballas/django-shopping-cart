@@ -14,8 +14,9 @@ class ProductListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        cart_count = SaleOrderItem.objects.filter(sale_order__user=self.request.user).count()
-        context["cart_count"] = cart_count
+        if self.request.user.is_authenticated:
+            cart_count = SaleOrderItem.objects.filter(sale_order__user=self.request.user).count()
+            context["cart_count"] = cart_count
         return context
 
 
@@ -25,8 +26,9 @@ class ProductDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        cart_count = SaleOrderItem.objects.filter(sale_order__user=self.request.user).count()
-        context["cart_count"] = cart_count
+        if self.request.user.is_authenticated:
+            cart_count = SaleOrderItem.objects.filter(sale_order__user=self.request.user).count()
+            context["cart_count"] = cart_count
         return context
 
 
