@@ -10,7 +10,8 @@
 </div>
 
 <div class="container mt-3 text-center">
-    <h1>Cart</h1>
+    <h2>Items in cart: {{ cart_count }}</h2>
+    <hr>
 </div>
 
 <section class="cart">
@@ -21,10 +22,10 @@
                 <img src="{{ sale.product.productimage_set.get.images.url }}" class="img-fluid">
             </div>
             <div class="col">
-                <h2>{{ sale.product.name }}</h2>
+                <h3>{{ sale.product.name }}</h3>
             </div>
             <div class="col">
-                <h2>{{ sale.product.price }}</h2>
+                <h3>{{ sale.product.price }}</h3>
             </div>
         </div>
         {% endfor %}
