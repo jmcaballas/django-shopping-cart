@@ -49,13 +49,21 @@ def add_to_cart(request, slug):
 
 
 @login_required
+def delete_from_cart(request, id):
+    delete_product = SaleOrderItem.objects.filter(sale_order__user=request.user, id=id)
+    if delete_product.exists():
+        delete_product[0].delete()
+    return redirect('shoppingcart:cart')
+
+
+@login_required
 def cart(request):
     sales = SaleOrderItem.objects.filter(sale_order__user=request.user)
     cart_count = SaleOrderItem.objects.filter(sale_order__user=request.user).count()
 
     context = {
         'sales': sales,
-        'cart_count':cart_count
+        'cart_count':cart_count,
     }
 
     return render(request, 'shoppingcart/cart.html', context)
