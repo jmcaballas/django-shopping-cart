@@ -21,8 +21,15 @@
                 <h2>{{ product.name }}</h2>
                 <h4>{{ product.description }}</h4>
                 <h2>{{ product.price }}</h2>
-                <h4>[NUMBER FIELD FOR ORDER]</h4>
-                <button class="btn btn-danger">Add to Cart</button>
+                {% if user.is_authenticated %}
+                    {% if product.stock > 0 %}
+                        <h4>[NUMBER FIELD FOR ORDER]</h4>
+                        <button class="btn btn-danger">Add to Cart</button>
+                    {% else %}
+                        <h4>OUT OF STOCK</h4>
+                        <button class="btn btn-danger" disabled>Add to Cart</button>
+                    {% endif %}
+                {% endif %}
             </div>
         </div>
     </div>

@@ -14,7 +14,7 @@ class ProductListView(ListView):
 
 
 class ProductDetailView(DetailView):
-    model = Product
+    queryset = Product.objects.with_stock()
     template_name = "shoppingcart/details.html"
 
 
