@@ -1,6 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import DetailView, ListView
 
 from .models import Product, SaleOrder, SaleOrderItem
@@ -32,7 +31,7 @@ def add_to_cart(request, slug):
         sale_order=sale_order[0],
         unit_price=quantity*cart_product.price
     )
-    return HttpResponse("Item added to cart", request)
+    return redirect('shoppingcart:cart')
 
 
 @login_required
