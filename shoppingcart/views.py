@@ -60,6 +60,11 @@ def delete_from_cart(request, id):
     delete_product = SaleOrderItem.objects.filter(sale_order__user=request.user, id=id)
     if delete_product.exists():
         delete_product[0].delete()
+
+    cart_count = SaleOrderItem.objects.filter(sale_order__user=request.user).count()
+
+    if cart_count == 0:
+        SaleOrder.objects.filter(user=request.user).delete()
     return redirect('shoppingcart:cart')
 
 
@@ -86,6 +91,9 @@ def checkout(request):
         checkout_product.delete()
 
     cart_count = SaleOrderItem.objects.filter(sale_order__user=request.user).count()
+
+    if cart_count == 0:
+        SaleOrder.objects.filter(user=request.user).delete()
     
     context = {
         'cart_count': cart_count,
